@@ -1,5 +1,7 @@
+jest.mock("./ingredientsService");
 import request from "supertest"
 import app from "./app"
+import ingredientService from "./ingredientsService"
 
 describe('POST /add', () => {
   it('responds with json', (done) => {
@@ -19,11 +21,14 @@ describe('POST /add', () => {
 
 describe('GET /list', () => {
   it('lists items', () => {
+    const listOfIngredients =[{name: 'beetroot', quantity: 50, unit: 'g'}, {name: 'sweet potato', quantity: 500, unit: 'g'}, {name: 'peppers', quantity: 100, unit: 'g'}];
+    (ingredientService as jest.Mock).mockReturnValue(listOfIngredients)
     return request(app)
     .get('/list')
     .set('Accept', 'application/json')
     .expect('Content-Type', /json/)
     .expect(200)
-    .expect([{name: 'beetroot', quantity: '50', unit: 'g'}, {name: 'sweet potato', quantity: '500', unit: 'g'}, {name: 'peppers', quantity: '100', unit: 'g'}])
+    .expect(listOfIngredients)
   })
 })
+

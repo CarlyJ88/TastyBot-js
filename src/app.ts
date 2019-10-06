@@ -1,4 +1,7 @@
 import express from "express"
+import listIngredients from "./ingredientsService"
+import { Pool, Client } from 'pg'
+
 const app = express()
 app.use(express.json())
 
@@ -7,7 +10,7 @@ app.post('/add', (req, res) =>{
 })
 
 app.get('/list', (req, res) =>{
-  res.json([{name: 'beetroot', quantity: '50', unit: 'g'}, {name: 'sweet potato', quantity: '500', unit: 'g'}, {name: 'peppers', quantity: '100', unit: 'g'}])
+  res.json(listIngredients())
 })
 
 export default app
