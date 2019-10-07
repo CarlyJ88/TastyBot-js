@@ -1,4 +1,4 @@
-import listIngredients from "./ingredientsService"
+import {listIngredients} from "./ingredientsService"
 import { Client } from 'pg'
 
 describe('list ingredients', () => {

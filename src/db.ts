@@ -1,4 +1,4 @@
-import { Client } from 'pg'
+import { Client } from 'pg';
 
 export default async function executeQuery(sql: string, values: any[]){
   const client = new Client({

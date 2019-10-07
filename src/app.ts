@@ -1,5 +1,5 @@
 import express from "express"
-import listIngredients from "./ingredientsService"
+import {listIngredients} from "./ingredientsService"
 import { Pool, Client } from 'pg'
 
 const app = express()
