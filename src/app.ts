@@ -1,16 +1,19 @@
 import express from "express"
 import {listIngredients} from "./ingredientsService"
-import { Pool, Client } from 'pg'
 
 const app = express()
 app.use(express.json())
 
-app.post('/add', (req, res) =>{
+app.post('/add-ingredient', (req, res) =>{
   res.json(req.body)  
 })
 
-app.get('/list', (req, res) =>{
-  res.json(listIngredients())
+app.get('/list', async(req, res) =>{
+  res.json(await listIngredients())
+})
+
+app.post('add-recipe-ingredients', (req, res) => {
+  res.json(req.body)
 })
 
 export default app

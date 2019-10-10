@@ -7,5 +7,8 @@ export default async function executeQuery(sql: string, values: any[]){
   })
   await client.connect()
 
-  return await client.query(sql, values);
+  const something = await client.query(sql, values)
+  await client.end()
+  return something
+
 }

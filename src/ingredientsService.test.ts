@@ -3,15 +3,33 @@ import { Client } from 'pg'
 
 describe('list ingredients', () => {
   const values = ["name", 1, "unit", new Date(), new Date()]
-  it('returns list of ingredients from the database', async () => {
-    const client = new Client({
+  const client = new Client({
       user: 'carlyjenkinson',
       database: 'mymealapp_test'
-    })
-    await client.connect()
+    }) 
+    
 
-    client.query('DELETE FROM current_stock')
+
+  beforeEach(async ()=>{
+    await client.connect().then(()=>{
+    // await client.connect()
+    // await client.query('DELETE FROM current_stock');
+    // await client.query('INSERT INTO current_stock(ingredient_name, quantity, unit, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *', values);
+    // await client.end()
+        return client.query('DELETE FROM current_stock')
+        })
+      });
+
+  it('returns list of ingredients from the database', async () => {
     client.query('INSERT INTO current_stock(ingredient_name, quantity, unit, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *', values)
-    expect(await listIngredients()).toEqual([{name: "name", quantity: 1, unit: "unit"}])
+    const ingredients = await listIngredients()  
+    expect(ingredients.length).toEqual(1);
+    expect(ingredients).toEqual([{name: "name", quantity: 1, unit: "unit"}])
+    
+  })
+
+  afterEach(async () => {
+    await client.query('DELETE FROM current_stock')
+    await client.end();
   })
 })
