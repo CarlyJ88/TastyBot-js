@@ -4,7 +4,7 @@ import app from "./app"
 import {listIngredients} from "./ingredientsService"
 
 describe('POST /add-ingredient', () => {
-  xit('responds with json', (done) => {
+  it('responds with json', (done) => {
     request(app)
       .post('/add-ingredient')
       .send({name: 'beetroot', quantity: 50, unit: 'g'})
@@ -20,7 +20,7 @@ describe('POST /add-ingredient', () => {
 })
 
 describe('GET /list', () => {
-  xit('lists items', async () => {
+  it('lists items', async () => {
     const listOfIngredients =[{name: 'beetroot', quantity: 50, unit: 'g'}, {name: 'sweet potato', quantity: 500, unit: 'g'}, {name: 'peppers', quantity: 100, unit: 'g'}];
     (listIngredients as jest.Mock).mockResolvedValue(listOfIngredients)
     return request(app)

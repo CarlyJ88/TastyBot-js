@@ -15,8 +15,8 @@ describe('insert', () => {
       database: 'mymealapp_test'
     })
     await client.connect()
-    .then(()=> {
-      client.query('DELETE FROM current_stock')
+    .then(async ()=> {
+    await client.query('DELETE FROM current_stock')
   })
 
   const values = ["name2", 2, "unit2", new Date(), new Date()]
@@ -32,4 +32,4 @@ afterEach(async () => {
   await client.end();
   });
 })
-})
+}) 

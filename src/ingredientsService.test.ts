@@ -11,12 +11,12 @@ describe('list ingredients', () => {
 
 
   beforeEach(async ()=>{
-    await client.connect().then(()=>{
+    await client.connect().then(async ()=>{
     // await client.connect()
     // await client.query('DELETE FROM current_stock');
     // await client.query('INSERT INTO current_stock(ingredient_name, quantity, unit, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *', values);
     // await client.end()
-        return client.query('DELETE FROM current_stock')
+        return await client.query('DELETE FROM current_stock')
         })
       });
 
@@ -32,4 +32,4 @@ describe('list ingredients', () => {
     await client.query('DELETE FROM current_stock')
     await client.end();
   })
-})
+}) 
