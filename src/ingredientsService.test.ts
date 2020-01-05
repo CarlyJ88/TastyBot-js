@@ -23,7 +23,7 @@ describe('list ingredients', () => {
 
   it('adds an ingredienta to the database', async () => {
     const ingredient = {name: 'pineapple', quantity: 300, unit: 'g'}
-    const add = await addIngredient(ingredient)
+    await addIngredient(ingredient)
     const ingredients = await client.query('SELECT * FROM current_stock')
     expect(ingredients.rows).toEqual([expect.objectContaining({ingredient_name: "pineapple", quantity: 300, unit: "g"})])
   })
