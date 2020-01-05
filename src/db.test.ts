@@ -15,7 +15,7 @@ describe('insert', () => {
       database: 'mymealapp_test'
     })
     await client.connect()
-    .then(async ()=> {
+    .then(async ()=> { 
     await client.query('DELETE FROM current_stock')
   })
 
