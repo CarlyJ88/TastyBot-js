@@ -1,4 +1,4 @@
-import {listIngredients, addIngredient} from "./ingredientsService"
+import {listIngredients, addIngredient, deleteIngredient} from "./ingredientsService"
 import { Client } from 'pg'
 
 describe('list ingredients', () => {
@@ -21,11 +21,19 @@ describe('list ingredients', () => {
     expect(ingredients).toEqual([{name: "name", quantity: 1, unit: "unit"}])
   })
 
-  it('adds an ingredienta to the database', async () => {
+  it('adds an ingredient to the database', async () => {
     const ingredient = {name: 'pineapple', quantity: 300, unit: 'g'}
     await addIngredient(ingredient)
     const ingredients = await client.query('SELECT * FROM current_stock')
     expect(ingredients.rows).toEqual([expect.objectContaining({ingredient_name: "pineapple", quantity: 300, unit: "g"})])
+  })
+
+  it('deletes an ingredient from the database', async () => {
+    const ingredient = {name: 'pineapple', quantity: 300, unit: 'g'}
+    await addIngredient(ingredient)
+    await deleteIngredient(ingredient)
+    const ingredients = await client.query('SELECT * FROM current_stock')
+    expect(ingredients.rows).toEqual([])
   })
 
   afterEach(async () => {
