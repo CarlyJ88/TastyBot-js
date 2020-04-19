@@ -32,10 +32,10 @@ describe('GET /list', () => {
   })
 })
 
-describe('POST /add-recipe-ingredients', () => {
-  xit('responds with json', (done) => {
+describe('POST /add-ingredient', () => {
+  it('responds with json', (done) => {
     request(app)
-      .post('/add-recipe-ingredients')
+      .post('/add-ingredient')
       .send({name: 'sweet potato', quantity: 150, unit: 'g'})
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
