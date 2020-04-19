@@ -1,23 +1,7 @@
 jest.mock("./ingredientsService");
 import request from "supertest"
 import app from "./app"
-import {listIngredients} from "./ingredientsService"
-
-describe('POST /add-ingredient', () => {
-  it('responds with json', (done) => {
-    request(app)
-      .post('/add-ingredient')
-      .send({name: 'beetroot', quantity: 50, unit: 'g'})
-      .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .expect({name: 'beetroot', quantity: 50, unit: 'g'})
-      .end(function(err, res) {
-        if (err) return done(err)
-        done()
-      })
-  })
-})
+import {listIngredients, addIngredient} from "./ingredientsService"
 
 describe('GET /list', () => {
   it('lists items', async () => {
@@ -34,16 +18,20 @@ describe('GET /list', () => {
 
 describe('POST /add-ingredient', () => {
   it('responds with json', (done) => {
+    const ingredient = {name: 'sweet potato', quantity: 150, unit: 'g'};
+    (addIngredient as jest.Mock).mockResolvedValueOnce({id:"someId", ...ingredient})
     request(app)
       .post('/add-ingredient')
-      .send({name: 'sweet potato', quantity: 150, unit: 'g'})
+      .send(ingredient)
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
-      .expect({name: 'sweet potato', quantity: 150, unit: 'g'})
+      .expect({id: "someId", name: 'sweet potato', quantity: 150, unit: 'g'})
       .end(function(err, res) {
         if (err) return done(err)
+        expect(addIngredient).toHaveBeenCalledWith(ingredient);
         done()
       })
+    
   })
 })
