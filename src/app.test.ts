@@ -1,7 +1,7 @@
 jest.mock("./ingredientsService");
 import request from "supertest"
 import app from "./app"
-import {listIngredients, addIngredient} from "./ingredientsService"
+import {listIngredients, addIngredient, deleteIngredient} from "./ingredientsService"
 
 describe('GET /list', () => {
   it('lists items', async () => {
@@ -32,6 +32,21 @@ describe('POST /add-ingredient', () => {
         expect(addIngredient).toHaveBeenCalledWith(ingredient);
         done()
       })
-    
+  })
+})
+
+describe('DELETE /delete-ingredient', () => {
+  it('removes ingredient from database', (done) => {
+    request(app)
+      .delete('/delete-ingredient')
+      .send({id: 'someId'})
+      .set('Accept', 'application/json')
+      // .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function(err, res) {
+        if (err) return done(err)
+        expect(deleteIngredient).toHaveBeenCalledWith('someId');
+        done()
+      })
   })
 })
