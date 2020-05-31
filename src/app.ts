@@ -1,8 +1,10 @@
 import express from "express"
 import {listIngredients, addIngredient} from "./ingredientsService"
+import cors from "cors"
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 app.post('/add-ingredient', async(req, res) =>{
   const ingredient = req.body
