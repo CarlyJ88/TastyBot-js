@@ -8,14 +8,14 @@ describe('list ingredients', () => {
   beforeEach(async ()=>{
     client = new Client({
       user: 'carlyjenkinson',
-      database: 'mymealapp_test'
+      database: 'tasty_bot_test'
     }) 
     await client.connect()
     return await client.query('DELETE FROM current_stock')
   });
 
   it('returns list of ingredients from the database', async () => {
-    await client.query('INSERT INTO current_stock(ingredient_name, quantity, unit, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *', values)
+    await client.query('INSERT INTO current_stock(ingredient_name, quantity, unit) VALUES($1, $2, $3) RETURNING *', values)
     const ingredients = await listIngredients()  
     expect(ingredients.length).toEqual(1);
     expect(ingredients).toEqual([{id: expect.anything(), ingredient_name: "name", quantity: 1, unit: "unit"}])

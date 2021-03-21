@@ -12,7 +12,7 @@ describe('insert', () => {
   beforeEach(async () => {
     const client = new Client({
       user: 'carlyjenkinson',
-      database: 'mymealapp_test'
+      database: 'tasty_bot_test'
     })
     await client.connect()
     .then(async ()=> { 
@@ -22,7 +22,7 @@ describe('insert', () => {
   const values = ["name2", 2, "unit2", new Date(), new Date()]
   
   it('insert ingredient to the database', async() => {
-    const a = await executeQuery('INSERT INTO current_stock(ingredient_name, quantity, unit, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *', values);
+    const a = await executeQuery('INSERT INTO current_stock(ingredient_name, quantity, unit) VALUES($1, $2, $3) RETURNING *', values);
     console.log(a);
     expect(a).toBeDefined();
   })

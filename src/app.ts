@@ -4,16 +4,19 @@ import cors from "cors"
 
 const app = express()
 app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 app.post('/add-ingredient', async(req, res) => {
   const ingredient = req.body
+  console.log(req.body, 'req.body')
   const passBack = await addIngredient(ingredient)
   res.json(passBack)
 })
 
 app.delete('/delete-ingredient', async(req, res) => {
   const id = req.body.id
+  console.log(req.body, 'req.body')
   console.log(id)
   const comingBack = await deleteIngredient(id)
   res.json(comingBack)

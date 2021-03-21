@@ -7,7 +7,9 @@
     "test": "jest",
     "run-test": "jest --watch",
     "start": "nodemon src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "migrate": "db-migrate up",
+    "migrate:create": "db-migrate create"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +29,8 @@
     "@types/node-fetch": "^2.5.2",
     "@types/pg": "^7.11.2",
     "@types/supertest": "^2.0.8",
+    "db-migrate": "^0.11.12",
+    "db-migrate-pg": "^1.2.2",
     "jest": "^24.9.0",
     "nodemon": "^1.19.3",
     "supertest": "^4.0.2",

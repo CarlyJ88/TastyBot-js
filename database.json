@@ -1,0 +1,13 @@
+{
+  "defaultEnv":"local",
+  "sql-file" : true,
+  "local": {
+    "driver": "pg",
+    "user": {"ENV":"DB_USER"},
+    "password": {"ENV":"DB_PWD"},
+    "host": "localhost",
+    "database": "tasty_bot_test",
+    "port": "5432",
+    "schema": "tasty_bot_test"
+  }
+}

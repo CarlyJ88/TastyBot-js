@@ -16,7 +16,7 @@ export async function listIngredients(): Promise<IngredientsSaved[]> {
 }
 
 export async function addIngredient(ingredient: Ingredients): Promise<IngredientsSaved> {
-  const result = await executeQuery('INSERT INTO current_stock(ingredient_name, quantity, unit, created_at, updated_at) VALUES($1, $2, $3, $4, $5) RETURNING *', [ingredient.ingredient_name, ingredient.quantity, ingredient.unit, new Date(), new Date()]);
+  const result = await executeQuery('INSERT INTO current_stock(ingredient_name, quantity, unit) VALUES($1, $2, $3) RETURNING *', [ingredient.ingredient_name, ingredient.quantity, ingredient.unit]);
   return { id: result.rows[0].id, ingredient_name: result.rows[0].ingredient_name, quantity: result.rows[0].quantity, unit: result.rows[0].unit };
 }
 
