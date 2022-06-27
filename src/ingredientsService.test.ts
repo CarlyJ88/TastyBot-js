@@ -1,16 +1,19 @@
 import {listIngredients, addIngredient, deleteIngredient} from "./ingredientsService"
 import { Client } from 'pg'
+import { cleanDb } from "./testHelper/cleanDb";
 
 describe('list ingredients', () => {
-  const values = ["name", 1, "unit", new Date(), new Date()]
+  const values = ["name", 1, "unit"]
   let client:Client;
 
   beforeEach(async ()=>{
     client = new Client({
-      user: 'carlyjenkinson',
+      user: 'postgres',
+      password: 'password',
       database: 'tasty_bot_test'
     }) 
     await client.connect()
+    await cleanDb(client);
     return await client.query('DELETE FROM current_stock')
   });
 
@@ -31,7 +34,9 @@ describe('list ingredients', () => {
   it('deletes an ingredient from the database', async () => {
     const ingredient = {ingredient_name: 'pineapple', quantity: 300, unit: 'g'}
     const ingredientSaved = await addIngredient(ingredient)
+    console.log(ingredientSaved.id, 'ingredientSaved.id')
     await deleteIngredient(ingredientSaved.id)
+    console.log(ingredientSaved.id, 'ingredientSaved.id')
     const ingredients = await client.query('SELECT * FROM current_stock')
     expect(ingredients.rows).toEqual([])
   })
@@ -48,6 +53,7 @@ describe('list ingredients', () => {
 
   afterEach(async () => {
     await client.query('DELETE FROM current_stock')
-    await client.end();
+    await cleanDb(client);
+    return await client.end();
   })
-}) 
+})

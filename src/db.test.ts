@@ -11,7 +11,8 @@ describe('insert', () => {
 
   beforeEach(async () => {
     const client = new Client({
-      user: 'carlyjenkinson',
+      user: 'postgres',
+      password: 'password',
       database: 'tasty_bot_test'
     })
     await client.connect()

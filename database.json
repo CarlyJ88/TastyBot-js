@@ -3,11 +3,11 @@
   "sql-file" : true,
   "local": {
     "driver": "pg",
-    "user": {"ENV":"DB_USER"},
-    "password": {"ENV":"DB_PWD"},
+    "user": "postgres",
+    "password": "password",
     "host": "localhost",
-    "database": "tasty_bot_test",
+    "database": "tasty_bot",
     "port": "5432",
-    "schema": "tasty_bot_test"
+    "schema": "tasty_bot"
   }
 }

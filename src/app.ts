@@ -26,9 +26,29 @@ app.get('/list', async(req, res) =>{
   res.json(await listIngredients())
 })
 
-app.post('add-recipe-ingredients', (req, res) => {
-  res.json(req.body)
-})
+// app.post('add-recipe-ingredients', async (req, res) => {
+//   const ingredient = req.body
+//   console.log(req.body, 'req.body')
+//   const passBack = await addRecipeIngredient(ingredient)
+//   res.json(passBack)
+// })
+
+// app.delete('/delete-recipe-ingredient', async(req, res) => {
+//   const id = req.body.id
+//   console.log(req.body, 'req.body')
+//   console.log(id)
+//   const comingBack = await deleteRecipeIngredient(id)
+//   res.json(comingBack)
+// })
+
+// app.post('add-recipe'), (req, res) => {
+//   const recipe = req.body
+//   console.log(req.body, 'req.body')
+//   const passBack = await addRecipeIngredient(recipe)
+//   res.json(passBack)
+// })
+
+
 
 export default app
 
