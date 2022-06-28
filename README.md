@@ -18,9 +18,9 @@ Edit `database.json` file and `db.ts` to refer to your user name (and add passwo
 
 Run `db-migrate create ` + filename + ` --sql-file` to create a migration.
 
-Run `db-migrate up initialize` to initialize the database.
+Run `db-migrate up` to initialize the database.
 
-Run `db-migrate down initialize` to drop the table.
+Run `db-migrate down` to drop the table.
 
 <!-- {"ENV":"DB_USER"} -->
 <!-- "password": {"ENV":"DB_PWD"}, -->
@@ -30,8 +30,3 @@ Run `db-migrate down initialize` to drop the table.
 Type `docker compose up` followed by `psql -h localhost -U postgres` with password as `password`.
 Type `lsof -i tcp:5432` to check what is running on the port.
 If there is already something running on the port, run `kill -9` + `process name` to kill what is running on the port.
-
-alter table current_stock drop column link;
-
-alter table current_stock
-add column link TEXT;
