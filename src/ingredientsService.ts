@@ -25,3 +25,9 @@ export async function addIngredient(ingredient: Ingredients): Promise<Ingredient
 export async function deleteIngredient(id: number): Promise<void> {
   await executeQuery('DELETE FROM current_stock WHERE id = $1', [id]);
 }
+
+export async function editIngredient(ingredients: IngredientsSaved): Promise<IngredientsSaved> {
+  console.log('am i here')
+  const ingredient = await executeQuery('UPDATE current_stock SET ingredient_name = $1, quantity = $2, unit = $3, link = $4, categories = $5 WHERE id = $6 RETURNING *', [ingredients.ingredient_name, ingredients.quantity, ingredients.unit, ingredients.link, ingredients.categories, ingredients.id]);
+  return { id: ingredient.rows[0].id, ingredient_name: ingredient.rows[0].ingredient_name, quantity: ingredient.rows[0].quantity, unit: ingredient.rows[0].unit, link: ingredient.rows[0].link, categories: ingredient.rows[0].categories };
+}

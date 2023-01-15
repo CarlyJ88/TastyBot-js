@@ -1,5 +1,5 @@
 import express from "express"
-import {listIngredients, addIngredient, deleteIngredient} from "./ingredientsService"
+import {listIngredients, addIngredient, deleteIngredient, editIngredient} from "./ingredientsService"
 import cors from "cors"
 
 const app = express()
@@ -24,6 +24,13 @@ app.delete('/delete-ingredient', async(req, res) => {
 
 app.get('/list', async(req, res) =>{
   res.json(await listIngredients())
+})
+
+app.put('/edit-ingredient', async(req, res) => {
+  const ingredient = req.body
+  console.log(ingredient, 'ingredient')
+  const passBack = await editIngredient(ingredient)
+  res.json(passBack)
 })
 
 // app.post('add-recipe-ingredients', async (req, res) => {

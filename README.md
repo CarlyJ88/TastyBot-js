@@ -4,7 +4,15 @@
 <!-- when item it used from current stock ask if I want to add it to shopping list and if yes add it if not put it in the waiting pile of shopping list -->
 <!-- add best buy/use buy date to the ingredient so I know how fast I should use it up -->
 <!-- add a how much product is left state and also need to figure out a way to add an item to the shopping list when there is still some left so it needs to appear in current stock and shopping list if I want to buy it again immediately -->
-<!-- order list of ingredients into categories and I can add ingredient to that category like fruit, veg, grains, pulses, condiments... -->
+<!-- order list of ingredients into categories and I can add ingredient to that category like fruit, veg, grains, pulses, condiments... and clasify type of vegetable such as:
+Leafy green – lettuce, spinach and silverbeet.
+Cruciferous – cabbage, cauliflower, Brussels sprouts and broccoli.
+Marrow – pumpkin, cucumber and zucchini.
+Root – potato, sweet potato and yam.
+Edible plant stem – celery and asparagus.
+Allium – onion, garlic and shallot. ????-->
+<!-- add edit ingredients functionality -->
+<!-- query data by category or select each category from full list on the front end ??? -->
 
 ### How to migrate the database
 
